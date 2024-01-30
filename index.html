@@ -1,204 +1,52 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professeur Delphine</title>
+    <title>Hermas Chat</title>
     <style>
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
-        .header {
-            background-color: #4B0082; /* Bleu indigo */
-            color: #FFFFFF;
-            padding: 10px;
+        header {
+            background-color: #333;
+            color: #fff;
             text-align: center;
-            font-weight: bold;
+            padding: 1em;
         }
-        .main-content {
-            background-color: #0000FF; /* Bleu */
-            color: #FFFFFF;
-            padding: 20px;
-            text-align: justify;
+        section {
+            margin: 2em;
         }
-        .footer {
-            background-color: #000000; /* Noir foncé */
-            color: #FFFFFF;
-            padding: 10px;
+        footer {
+            background-color: #333;
+            color: #fff;
             text-align: center;
-        }
-        .buy-button {
-            background-color: #FF0000; /* Rouge */
-            color: #FFFFFF;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        .privacy-button {
-            background-color: #0000FF; /* Bleu */
-            color: #FFFFFF;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        Professeur Delphine
-    </div>
-
-    <div class="main-content">
-        <p style="font-family: 'Chalkduster', cursive;">
-            Découvrez un voyage captivant à travers les époques avec notre recueil d'histoires, où chaque page révèle des récits envoûtants et des personnages inoubliables. Plongez-vous dans des aventures qui transcendent le temps, explorant le passé et l'avenir, tissant un fil narratif qui éveillera votre imagination. Laissez-vous emporter par des histoires riches en émotions, en mystères et en leçons intemporelles, créant ainsi une expérience de lecture qui restera gravée dans votre esprit. Ce recueil vous promet un voyage littéraire où chaque histoire est une porte ouverte vers un monde fascinant qui n'attend que d'être exploré.
-        </p>
-        <img src="https://photos.app.goo.gl/XZZ5adbjnA3FFgrU6" alt="Image 1">
-        <img src="https://photos.app.goo.gl/SrWLxXmqrVqjpfDJ6" alt="Image 2">
-        <p>
-            Prix: 6€
-            <button class="buy-button" onclick="redirectToEmailPage()">Acheter</button>
-        </p>
-    </div>
-
-    <div class="footer">
-        <button class="privacy-button" onclick="redirectToPrivacyPolicy()">Politique de Confidentialité</button>
-        <p>Tous droits réservés © 2024 Professeur Delphine</p>
-        <p>Email: professeurdelphine@gmail.com</p>
-    </div>
-
-    <script>
-        function redirectToEmailPage() {
-            window.location.href = "email.html";
-        }
-        function redirectToPrivacyPolicy() {
-            window.location.href = "privacy.html";
-        }
-    </script>
-
+    <header>
+        <h1>Hermas Chat</h1>
+    </header>
+    <section>
+        <h2>Connexion</h2>
+        <form>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit">Se connecter</button>
+        </form>
+    </section>
+    <footer>
+        © 2024 Hermas Chat
+    </footer>
 </body>
 </html>
-<!-- email.html -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adresse Email</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0000FF; /* Bleu */
-            color: #FFFFFF;
-            text-align: center;
-            padding: 20px;
-        }
-        .continue-button {
-            background-color: #FF0000; /* Rouge */
-            color: #FFFFFF;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-
-    <h2>Entrez votre adresse email</h2>
-    <input type="email" id="emailInput" placeholder="Votre adresse email">
-    <br>
-    <button class="continue-button" onclick="redirectToPayment()">Continuer</button>
-
-    <script>
-        function redirectToPayment() {
-            window.location.href = "payment.html";
-        }
-    </script>
-
-</body>
-</html>
-<!-- payment.html -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0000FF; /* Bleu */
-            color: #FFFFFF;
-            text-align: center;
-            padding: 20px;
-        }
-        .thankyou-button {
-            background-color: #FF0000; /* Rouge */
-            color: #FFFFFF;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-
-    <h2>Choisissez votre moyen de paiement</h2>
-    <!-- Intégrer le processus de paiement par carte bancaire ou PayPal ici -->
-
-    <br>
-    <button class="thankyou-button" onclick="redirectToThankYou()">Continuer</button>
-
-    <script>
-        function redirectToThankYou() {
-            window.location.href = "thankyou.html";
-        }
-    </script>
-
-</body>
-</html>
-<!-- thankyou.html -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merci pour l'achat</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF;
-            color: #000000;
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
-
-    <h2>Merci pour l'achat</h2>
-    <p>Vous allez recevoir votre recueil d'histoire en une minute dans votre boîte mail.</p>
-
-</body>
-</html>
-<!-- privacy.html -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politique de Confidentialité</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF;
-            color: #000000;
-            text-align: justify;
-            padding: 20px;
-        }
-  </style>

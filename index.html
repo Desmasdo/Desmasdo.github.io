@@ -1,70 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hermas Chat</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    form {
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Hermas Chat</h1>
-  </header>
-  <section>
-    <h2>Inscription</h2>
-    <form id="signupForm" onsubmit="signup(event)">
-      <label for="email">Adresse e-mail:</label>
-      <input type="email" id="email" required>
-      <button type="submit">S'inscrire</button>
-    </form>
-    <div id="confirmation" style="display:none;">
-      <p>Un code de confirmation a été envoyé à votre adresse e-mail. Veuillez le saisir ci-dessous:</p>
-      <form onsubmit="confirmCode(event)">
-        <label for="confirmationCode">Code de confirmation:</label>
-        <input type="text" id="confirmationCode" required>
-        <button type="submit">Confirmer</button>
-      </form>
-    </div>
-  </section>
-  <section>
-    <h2>Connexion</h2>
-    <form onsubmit="login(event)">
-      <label for="loginEmail">Adresse e-mail:</label>
-      <input type="email" id="loginEmail" required>
-      <button type="submit">Se connecter</button>
-    </form>
-  </section>
-  <footer>
-    <p>&copy; 2024 Hermas Chat. Tous droits réservés.</p>
-  </footer>
+import pygame
+import sys
+import random
 
-  <script>
-    function signup(event) {
-      event.preventDefault();
-      // Simulate sending a confirmation code via email
-      document.getElementById("signupForm").style.display = "none";
-      document.getElementById("confirmation").style.display = "block";
-    }
+# Initialisation de Pygame
+pygame.init()
 
-    function confirmCode(event) {
-      event.preventDefault();
-      // Simulate confirming the code
-      alert("Inscription confirmée avec succès!");
-    }
+# Couleurs
+blanc = (255, 255, 255)
+rouge = (255, 0, 0)
 
-    function login(event) {
-      event.preventDefault();
-      // Simulate user login
-      alert("Connexion réussie!");
-    }
-  </script>
-</body>
-    </html>
+# Paramètres du jeu
+largeur_fenetre = 800
+hauteur_fenetre = 600
+taille_personnage = 50
+vitesse_personnage = 8
+vitesse_oiseau = 5
+niveaux = 6
+
+# Initialisation de la fenêtre
+fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
+pygame.display.set_caption("Giroud")
+
+# Position initiale du personnage
+x_personnage = largeur_fenetre // 2 - taille_personnage // 2
+y_personnage = hauteur_fenetre - taille_personnage - 10
+
+# Niveau actuel
+niveau = 1
+
+# Position initiale de l'oiseau
+x_oiseau = random.randint(0, largeur_fenetre - taille_personnage)
+y_oiseau = 0
+
+# Fonction pour afficher le personnage
+def afficher_personnage(x, y):
+    font = pygame.font.SysFont(None, 50)
+    texte_personnage = font.render("#", True, rouge)
+    fenetre.blit(texte_personnage, (x, y))
+
+# Fonction pour afficher un oiseau
+def afficher_oiseau(x, y):
+    font = pygame.font.SysFont(None, 36)
+    texte_oiseau = font.render("*", True, rouge)
+    fenetre.blit(texte_oiseau, (x, y))
+
+# Fonction pour vérifier la collision entre le personnage et l'oiseau
+def collision(x_personnage, y_personnage, x_oiseau, y_oiseau):
+    distance = ((x_personnage - x_oiseau)**2 + (y_personnage - y_oiseau)**2)**0.5
+    return distance < taille_personnage
+
+# Boucle principale du jeu
+clock = pygame.time.Clock()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    # Mouvements du personnage
+    touches = pygame.key.get_pressed()
+    if touches[pygame.K_LEFT] and x_personnage > 0:
+        x_personnage -= vitesse_personnage
+    if touches[pygame.K_RIGHT] and x_personnage < largeur_fenetre - taille_personnage:
+        x_personnage += vitesse_personnage
+
+    # Mouvements des oiseaux
+    y_oiseau += vitesse_oiseau
+
+    # Vérification de la collision avec l'oiseau
+    if collision(x_personnage, y_personnage, x_oiseau, y_oiseau):
+        print("Game Over")
+        pygame.quit()
+        sys.exit()
+
+    # Si l'oiseau atteint le bas de l'écran, réinitialiser sa position et augmenter le niveau
+    if y_oiseau > hauteur_fenetre:
+        x_oiseau = random.randint(0, largeur_fenetre - taille_personnage)
+        y_oiseau = 0
+        niveau += 1
+        if niveau > niveaux:
+            print("Félicitations, tu as gagné !")
+            pygame.quit()
+            sys.exit()
+
+    # Effacer l'écran
+    fenetre.fill(blanc)
+
+    # Afficher le personnage
+    afficher_personnage(x_personnage, y_personnage)
+
+    # Afficher l'oiseau
+    afficher_oiseau(x_oiseau, y_oiseau)
+
+    # Afficher le niveau
+    font = pygame.font.SysFont(None, 25)
+    texte_niveau = font.render(f"Niveau : {niveau}", True, rouge)
+    fenetre.blit(texte_niveau, (10, 10))
+
+    # Mettre à jour l'écran
+    pygame.display.update()
+
+    # Réguler la vitesse du jeu
+    clock.tick(30)
